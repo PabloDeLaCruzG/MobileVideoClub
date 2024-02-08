@@ -46,17 +46,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun goToEdit(pelicula: Pelicula) {
-
-        val bundle = Bundle()
-        pelicula.id?.let { bundle.putInt("id", it) }
-        bundle.putString("titulo", pelicula.titulo)
-        bundle.putString("descripcion", pelicula.descripcion)
-        bundle.putString("portada", pelicula.portada)
-
-        val updateFragmentPelicula = FormFragment()
-
-        updateFragmentPelicula.arguments = bundle
+        val bundle = Bundle().apply {
+            putInt("id", pelicula.id ?: -1)
+            putString("titulo", pelicula.titulo)
+            putString("descripcion", pelicula.descripcion)
+            putString("portada", pelicula.portada)
+            putBoolean("isEdit", true) // Indica que se está editando la película
+        }
         findNavController().navigate(R.id.action_nav_home_to_nav_form, bundle)
-
     }
 }

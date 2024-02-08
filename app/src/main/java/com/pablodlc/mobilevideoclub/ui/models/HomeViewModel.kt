@@ -56,4 +56,20 @@ class HomeViewModel : ViewModel(){
 
     }
 
+    fun updatePelicula(pelicula: Pelicula) {
+
+        val apiService = RetrofitInstance.retrofit.create(ApiService::class.java)
+        val call = apiService.updatePeliculaApi(pelicula.id ?: -1, pelicula)
+        call.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                Log.d("!!", "Pelicula modificada")
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.e("ERROR", "Error en FormViewModel")
+            }
+
+        })
+    }
+
 }

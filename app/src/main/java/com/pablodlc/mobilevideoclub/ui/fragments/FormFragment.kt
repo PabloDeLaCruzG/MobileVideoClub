@@ -18,46 +18,48 @@ class FormFragment : Fragment() {
     private var isEdit = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         binding = FragmentFormBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Obtener los argumentos del Bundle
         val titulo = arguments?.getString("titulo")
         val descripcion = arguments?.getString("descripcion")
         val portada = arguments?.getString("portada")
         isEdit = arguments?.getBoolean("isEdit") ?: false
 
-        binding.titleForm.setText(titulo);
-        binding.descForm.setText(descripcion);
-        binding.urlForm.setText(portada);
+        // Asignar los valores a los campos del formulario
+        binding.titleForm.setText(titulo)
+        binding.descForm.setText(descripcion)
+        binding.urlForm.setText(portada)
 
-        return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+        // Inicializar el ViewModel
         viewModel = ViewModelProvider(this).get(FormViewModel::class.java)
+
+        // Configurar el listener del botón de agregar
         binding.add.setOnClickListener {
-            val tituloForm = binding.titleForm.text
-            val descripcionForm = binding.descForm.text
-            val portadaForm = binding.urlForm.text
+            val tituloForm = binding.titleForm.text.toString()
+            val descripcionForm = binding.descForm.text.toString()
+            val portadaForm = binding.urlForm.text.toString()
 
-            val titulo : String = binding.titleForm.text.toString()
-            val descripcion : String = binding.descForm.text.toString()
-            val portada : String= binding.urlForm.text.toString()
-
-            if (isEdit){
-                var id = arguments?.getInt("id")
-                val peliculaEditada = Pelicula(id, titulo, descripcion, portada)
+            if (isEdit) {
+                val id = arguments?.getInt("id")
+                val peliculaEditada = Pelicula(id, tituloForm, descripcionForm, portadaForm)
                 viewModel.updatePelicula(peliculaEditada)
             } else {
-                val nuevaPelicula = Pelicula(null,titulo,descripcion,portada)
+                val nuevaPelicula = Pelicula(null, tituloForm, descripcionForm, portadaForm)
                 viewModel.addPelicula(nuevaPelicula)
             }
-            tituloForm.clear()
-            descripcionForm.clear()
-            portadaForm.clear()
+
+            // Limpiar los campos del formulario
+            binding.titleForm.setText("")
+            binding.descForm.setText("")
+            binding.urlForm.setText("")
         }
     }
+
 
 }

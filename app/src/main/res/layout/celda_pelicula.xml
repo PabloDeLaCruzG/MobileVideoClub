@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:layout_margin="20dp">
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="30sp"/>
+                android:textSize="24sp"/>
 
             <TextView
                 android:id="@+id/descripcionTextView"
@@ -36,8 +35,8 @@
 
         <ImageView
             android:id="@+id/portadaImageView"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
             android:layout_gravity="center_vertical"
             android:scaleType="centerCrop"
             android:contentDescription="@string/todo" />
@@ -47,7 +46,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="bottom">
+        android:layout_gravity="bottom"
+        android:layout_marginTop="16dp">
 
         <Button
             android:id="@+id/eliminarButton"
@@ -55,7 +55,6 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="Eliminar"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"/>
 
         <Button
@@ -64,7 +63,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="Modificar"
-            android:layout_marginTop="16dp"
             android:layout_marginStart="8dp"/>
     </LinearLayout>
 </LinearLayout>
+
